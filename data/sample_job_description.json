@@ -1,0 +1,44 @@
+{
+  "job_title": "Senior Data Engineer",
+  "company": "DataTech Solutions",
+  "location": "San Francisco, CA",
+  "job_type": "Full-time",
+  "description": "We are seeking a talented Senior Data Engineer to join our growing team. The ideal candidate will have strong experience in building and maintaining data pipelines, working with large-scale datasets, and implementing cloud-based data solutions.",
+  "responsibilities": [
+    "Design, build, and maintain scalable data pipelines",
+    "Develop ETL processes to integrate data from multiple sources",
+    "Optimize data storage and retrieval systems",
+    "Collaborate with data scientists and analysts to support their data needs",
+    "Implement data quality checks and monitoring",
+    "Work with cloud platforms (AWS, GCP, or Azure)",
+    "Participate in code reviews and maintain documentation"
+  ],
+  "required_qualifications": [
+    "5+ years of experience in data engineering or related field",
+    "Strong proficiency in Python and SQL",
+    "Experience with data pipeline tools (Apache Airflow, Luigi, etc.)",
+    "Experience with big data technologies (Spark, Hadoop, etc.)",
+    "Familiarity with cloud platforms (AWS preferred)",
+    "Experience with data warehousing solutions (Redshift, BigQuery, Snowflake)",
+    "Strong understanding of data modeling and database design"
+  ],
+  "preferred_qualifications": [
+    "Experience with real-time data processing (Kafka, Kinesis)",
+    "Knowledge of containerization (Docker, Kubernetes)",
+    "Experience with data visualization tools",
+    "Master's degree in Computer Science or related field",
+    "Experience with machine learning pipelines"
+  ],
+  "technical_skills": [
+    "Python",
+    "SQL",
+    "Apache Spark",
+    "Apache Airflow",
+    "AWS (S3, Redshift, EMR, Lambda)",
+    "Docker",
+    "Git",
+    "ETL",
+    "Data Warehousing",
+    "Data Modeling"
+  ]
+}

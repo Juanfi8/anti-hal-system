@@ -1,0 +1,75 @@
+{
+  "personal_info": {
+    "name": "John Doe",
+    "email": "john.doe@email.com",
+    "phone": "+1-555-0123",
+    "location": "San Francisco, CA",
+    "linkedin": "linkedin.com/in/johndoe",
+    "github": "github.com/johndoe"
+  },
+  "professional_summary": "Experienced software engineer with 5 years of experience in full-stack development. Proficient in multiple programming languages and frameworks.",
+  "skills": [
+    "Python",
+    "JavaScript",
+    "React",
+    "Node.js",
+    "SQL",
+    "MongoDB",
+    "Git",
+    "Docker",
+    "AWS",
+    "Machine Learning",
+    "Data Analysis"
+  ],
+  "experience": [
+    {
+      "title": "Software Engineer",
+      "company": "Tech Corp",
+      "location": "San Francisco, CA",
+      "start_date": "2020-01",
+      "end_date": "Present",
+      "responsibilities": [
+        "Developed and maintained web applications using React and Node.js",
+        "Collaborated with cross-functional teams to deliver features",
+        "Implemented RESTful APIs and integrated third-party services",
+        "Optimized database queries improving performance by 30%"
+      ]
+    },
+    {
+      "title": "Junior Developer",
+      "company": "StartUp Inc",
+      "location": "San Francisco, CA",
+      "start_date": "2018-06",
+      "end_date": "2019-12",
+      "responsibilities": [
+        "Built responsive web interfaces using HTML, CSS, and JavaScript",
+        "Participated in agile development processes",
+        "Fixed bugs and improved code quality",
+        "Wrote unit tests to ensure code reliability"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Computer Science",
+      "institution": "University of California",
+      "location": "Berkeley, CA",
+      "graduation_date": "2018-05"
+    }
+  ],
+  "projects": [
+    {
+      "name": "E-commerce Platform",
+      "description": "Built a full-stack e-commerce application with payment integration",
+      "technologies": ["React", "Node.js", "MongoDB", "Stripe API"]
+    },
+    {
+      "name": "Data Analytics Dashboard",
+      "description": "Created an interactive dashboard for visualizing business metrics",
+      "technologies": ["Python", "Pandas", "Plotly", "Flask"]
+    }
+  ],
+  "certifications": [
+    "AWS Certified Developer - Associate"
+  ]
+}
