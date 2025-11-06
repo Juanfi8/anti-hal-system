@@ -1,0 +1,181 @@
+{
+  "personal_info": {
+    "name": "Alex Martinez",
+    "email": "alex.martinez@example.com",
+    "phone": "+1 (555) 123-4567",
+    "linkedin": "https://www.linkedin.com/in/alex-martinez",
+    "github": "https://github.com/alex-martinez",
+    "location": "San Francisco, CA"
+  },
+  "education": [
+    {
+      "degree": "Master of Science",
+      "major": "Computer Science",
+      "institution": "University of California, Berkeley",
+      "graduation_date": "2023-05",
+      "gpa": "3.85",
+      "relevant_courses": [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Advanced Algorithms",
+        "Distributed Systems",
+        "Deep Learning"
+      ]
+    },
+    {
+      "degree": "Bachelor of Science",
+      "major": "Computer Engineering",
+      "institution": "University of California, Berkeley",
+      "graduation_date": "2020-05",
+      "gpa": "3.75",
+      "relevant_courses": [
+        "Operating Systems",
+        "Computer Architecture",
+        "Data Structures",
+        "Probability & Statistics"
+      ]
+    }
+  ],
+  "work_experience": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Halcyon AI",
+      "location": "San Francisco, CA",
+      "start_date": "2023-06",
+      "end_date": "Present",
+      "responsibilities": [
+        "Architected and deployed production-grade NLP and sequence modeling systems, enhancing core platform capabilities.",
+        "Developed scalable, containerized model training and inference pipelines using PyTorch, Docker, and AWS services (e.g., SageMaker, EC2), optimizing for efficiency and reliability.",
+        "Collaborated cross-functionally with research, product, and SRE teams to integrate, deploy, and monitor ML models using CI/CD practices and robust observability frameworks."
+      ],
+      "achievements": [
+        "Deployed a critical NLP pipeline that achieved a 40% reduction in inference latency and a 3x increase in throughput, handling high-volume production traffic.",
+        "Pioneered development of model interpretability tools, enabling research teams to proactively diagnose model behavior, feature drift, and potential safety regressions.",
+        "Optimized ML model training and inference costs by 30% through implementing mixed-precision training and intelligent spot instance scheduling on AWS, significantly improving resource utilization."
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Edge Systems, Inc.",
+      "location": "Oakland, CA",
+      "start_date": "2020-07",
+      "end_date": "2023-05",
+      "responsibilities": [
+        "Engineered and maintained robust backend services in Python and Go, supporting high-performance edge computing products.",
+        "Designed and implemented scalable RESTful APIs and microservices, leveraging Kubernetes for orchestration and efficient resource management.",
+        "Drove standardization of observability practices, including structured logging, distributed tracing, and fault-tolerance mechanisms across a suite of critical services."
+      ],
+      "achievements": [
+        "Led successful migration of core services to Kubernetes, resulting in a 20% improvement in deployment velocity and enhanced system reliability and resilience.",
+        "Optimized critical API pathways, reducing average response times by 25% through advanced database query tuning and code refactoring.",
+        "Fostered team growth by mentoring 4 junior engineers and spearheading the internal engineering onboarding program, contributing to a culture of technical excellence."
+      ]
+    },
+    {
+      "title": "Research Assistant (NLP Lab)",
+      "company": "UC Berkeley - NLP Group",
+      "location": "Berkeley, CA",
+      "start_date": "2019-09",
+      "end_date": "2020-06",
+      "responsibilities": [
+        "Conducted advanced research on transformer architectures and data augmentation techniques, particularly for robust NLP in low-resource language contexts.",
+        "Developed and managed robust data preprocessing and evaluation pipelines for large-scale NLP datasets, ensuring data quality and experimental rigor.",
+        "Collaborated on technical reports and disseminated research findings through presentations, contributing to knowledge sharing within the NLP group."
+      ],
+      "achievements": [
+        "Co-authored a research paper on novel NLP techniques, accepted for presentation at a competitive peer-reviewed workshop.",
+        "Engineered and open-sourced a suite of data preprocessing utilities, adopted by multiple research projects to streamline experimentation and ensure consistency."
+      ]
+    }
+  ],
+  "skills": {
+    "technical": [
+      "Python (Production-Quality)",
+      "PyTorch",
+      "TensorFlow",
+      "scikit-learn",
+      "NLP (Transformer Architectures, LLMs)",
+      "Deep Learning",
+      "Machine Learning Engineering",
+      "Model Deployment & Serving",
+      "Containerization (Docker)",
+      "Orchestration (Kubernetes)",
+      "Cloud Platforms (AWS, GCP)",
+      "Observability (Monitoring, Logging, Tracing)",
+      "Performance Optimization (Mixed-Precision, Quantization, Batching)",
+      "Datastores (SQL, PostgreSQL, Redis, S3)",
+      "CI/CD for ML",
+      "Testing & Validation (Unit, Integration, Synthetic Evaluation)",
+      "C++",
+      "Rust"
+    ],
+    "languages": [
+      "English (native)",
+      "Spanish (fluent)"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "Kubernetes",
+      "AWS (S3, EC2, SageMaker, EKS, ECS)",
+      "GCP (Compute Engine, GKE, AI Platform)",
+      "MLflow",
+      "Prometheus",
+      "Grafana",
+      "Linux",
+      "Jupyter"
+    ],
+    "soft_skills": [
+      "Cross-functional Collaboration",
+      "Technical Leadership",
+      "Problem Solving",
+      "Strategic Communication (Technical & Non-Technical)",
+      "Mentorship",
+      "Engineering Best Practices",
+      "Product-Oriented Thinking"
+    ]
+  },
+  "projects": [
+    {
+      "name": "Anti-HAL System (Research Prototype)",
+      "description": "Spearheaded the 'Anti-HAL System,' a research prototype meticulously engineered to detect and mitigate undesired or unsafe behaviors in large language models (LLMs). This comprehensive system integrates advanced ML-based detectors, fine-tuned classifiers, and a dynamic runtime filter, augmented with human-in-the-loop escalation for robust behavior control.",
+      "technologies": [
+        "Python",
+        "PyTorch",
+        "Transformers",
+        "FastAPI",
+        "Docker",
+        "AWS"
+      ],
+      "achievements": [
+        "Engineered an end-to-end LLM safety detection and mitigation pipeline, achieving an average inference latency of <85ms per request in a production-like environment, critical for real-time applications.",
+        "Developed a comprehensive evaluation suite capable of assessing LLM behavior across 20+ diverse scenario classes, incorporating automated synthetic data generation for rigorous stress testing and validation."
+      ],
+      "url": "https://github.com/alex-martinez/anti-hal-system"
+    },
+    {
+      "name": "Resume Tailor",
+      "description": "Developed 'Resume Tailor,' an intelligent tool leveraging NLP to analyze job descriptions and optimize resume content for improved keyword matching and impact statements.",
+      "technologies": [
+        "Python",
+        "spaCy",
+        "OpenAI APIs",
+        "JSON"
+      ],
+      "achievements": [
+        "Implemented core data extraction and matching algorithms, resulting in a 30% increase in ATS match score heuristics during trial runs.",
+        "Ensured software quality by packaging as a robust CLI application with comprehensive unit tests."
+      ],
+      "url": "https://github.com/alex-martinez/resume-tailor"
+    }
+  ],
+  "certifications": [
+    "AWS Certified Machine Learning – Specialty",
+    "Deep Learning Specialization (Coursera)",
+    "Google Cloud Professional Data Engineer (in progress)"
+  ],
+  "awards": [
+    "Best Paper (Workshop) — Applied NLP Workshop, 2022",
+    "1st Place — University Capstone Hackathon, 2019"
+  ]
+}

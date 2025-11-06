@@ -1,44 +1,46 @@
 {
-  "job_title": "Senior Data Engineer",
-  "company": "DataTech Solutions",
-  "location": "San Francisco, CA",
-  "job_type": "Full-time",
-  "description": "We are seeking a talented Senior Data Engineer to join our growing team. The ideal candidate will have strong experience in building and maintaining data pipelines, working with large-scale datasets, and implementing cloud-based data solutions.",
+  "Job Title": "Senior Machine Learning Engineer — Safety & Deployment",
+  "Job Description": "We are looking for a senior machine learning engineer to design, build, and operate production-grade ML systems that detect, mitigate, and monitor undesired or unsafe behaviors in large language models. You will work across model development, inference serving, and observability to ensure robust, low-latency behavior-control pipelines, and collaborate closely with research, product, and SRE teams to ship safe, reliable ML features.",
+  "Company Name": "SentinelAI Labs",
+  "Company description": "SentinelAI Labs builds tools and platforms that help organizations detect and mitigate unsafe or harmful behavior in large language models and AI systems. We combine research-grade detectors, deployment tooling, and human-in-the-loop workflows to make AI behavior safer and auditable at scale.",
+  "Uniq Id": "SENT-AI-ENG-2025-001",
   "responsibilities": [
-    "Design, build, and maintain scalable data pipelines",
-    "Develop ETL processes to integrate data from multiple sources",
-    "Optimize data storage and retrieval systems",
-    "Collaborate with data scientists and analysts to support their data needs",
-    "Implement data quality checks and monitoring",
-    "Work with cloud platforms (AWS, GCP, or Azure)",
-    "Participate in code reviews and maintain documentation"
+    "Design and implement ML-based detectors and classifiers for identifying unsafe or undesired model outputs.",
+    "Build scalable, low-latency inference pipelines and orchestrate model serving (containerized services, autoscaling, batching strategies).",
+    "Integrate rule-based filters, classifiers, and runtime mitigations into a cohesive behavior-control pipeline.",
+    "Collaborate with research teams to productionize prototypes and iterate on model improvements.",
+    "Implement monitoring, alerting, and evaluation metrics for model performance, drift, and safety regressions.",
+    "Optimize model training and inference cost using mixed precision, quantization, and efficient infrastructure patterns.",
+    "Mentor junior engineers and contribute to engineering best practices (code review, testing, CI/CD, documentation)."
   ],
-  "required_qualifications": [
-    "5+ years of experience in data engineering or related field",
-    "Strong proficiency in Python and SQL",
-    "Experience with data pipeline tools (Apache Airflow, Luigi, etc.)",
-    "Experience with big data technologies (Spark, Hadoop, etc.)",
-    "Familiarity with cloud platforms (AWS preferred)",
-    "Experience with data warehousing solutions (Redshift, BigQuery, Snowflake)",
-    "Strong understanding of data modeling and database design"
-  ],
-  "preferred_qualifications": [
-    "Experience with real-time data processing (Kafka, Kinesis)",
-    "Knowledge of containerization (Docker, Kubernetes)",
-    "Experience with data visualization tools",
-    "Master's degree in Computer Science or related field",
-    "Experience with machine learning pipelines"
+  "experience_requirements": [
+    "5+ years of professional software engineering experience, with at least 3 years working on machine learning systems.",
+    "Proven track record deploying ML models to production and operating them at scale.",
+    "Experience designing low-latency inference systems and optimizing throughput/latency trade-offs.",
+    "Prior experience working cross-functionally with research, product, and site reliability engineering teams.",
+    "Experience with model evaluation, A/B testing, and establishing production metrics for ML models."
   ],
   "technical_skills": [
-    "Python",
-    "SQL",
-    "Apache Spark",
-    "Apache Airflow",
-    "AWS (S3, Redshift, EMR, Lambda)",
-    "Docker",
-    "Git",
-    "ETL",
-    "Data Warehousing",
-    "Data Modeling"
+    "Python (production-quality code)",
+    "PyTorch and/or TensorFlow",
+    "Transformers and NLP model tooling",
+    "Containerization (Docker) and orchestration (Kubernetes)",
+    "Cloud platforms (AWS/GCP) — deployment and infra for ML (SageMaker, ECS, EKS, or equivalent)",
+    "CI/CD for ML (GitHub Actions, Jenkins, ArgoCD, MLflow)",
+    "Observability: Prometheus, Grafana, structured logging, tracing",
+    "Datastores: PostgreSQL, Redis, S3-compatible object storage",
+    "Performance optimization: batching, mixed-precision, quantization, model sharding",
+    "Testing & validation: unit/integration tests, synthetic evaluation suites"
+  ],
+  "education_requirements": [
+    "Bachelor's degree in Computer Science, Electrical Engineering, or related field (or equivalent practical experience).",
+    "Master's or PhD in ML, AI, or related field preferred but not required."
+  ],
+  "other_requirements": [
+    "Strong written and verbal communication skills; ability to explain technical trade-offs to non-engineers.",
+    "Authorization to work in the hiring country.",
+    "Comfort operating in an ambiguous, fast-moving research-to-product environment.",
+    "Willingness to participate in on-call rotations for production services (limited).",
+    "Demonstrated commitment to engineering quality: code reviews, testing, and documentation."
   ]
 }

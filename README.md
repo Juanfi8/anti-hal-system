@@ -2,32 +2,6 @@
 
 An AI-powered resume tailoring application that uses Google's Gemini AI to customize resumes for specific job descriptions.
 
-## Features
-
-- **Intelligent Resume Tailoring**: Automatically adapts your resume to match job descriptions
-- **Gemini AI**: Leverages Google's Gemini language model for high-quality results
-- **JSON-based**: Works with structured JSON format for easy parsing and modification
-- **Contextual Modifications**: Smartly modifies relevant sections while keeping factual information intact
-- **Simple API**: Easy-to-use functions for reading JSON files and preparing context
-
-## What Gets Modified
-
-The application intelligently modifies:
-- Professional summary/objective to align with job requirements
-- Skills section (emphasizes relevant skills, reorders if needed)
-- Work experience descriptions (highlights relevant achievements)
-- Project descriptions to showcase relevant work
-
-What stays unchanged:
-- Contact information
-- Education dates and institution names
-- Factual employment history (dates, company names)
-
-## Prerequisites
-
-- Python 3.8 or higher
-- Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
-
 ## Installation
 
 1. Clone the repository:
@@ -58,7 +32,11 @@ python resume_tailor.py <resume_path> <job_description_path> [output_path]
 
 Example:
 ```bash
-python resume_tailor.py data/sample_resume.json data/sample_job_description.json data/tailored_resume.json
+python resume_tailor.py data/sample_resume.json data/sample_job_description.json
+# Output will be saved to output/tailored_resume.json by default
+
+# Or specify a custom output path:
+python resume_tailor.py data/sample_resume.json data/sample_job_description.json custom_output.json
 ```
 
 ### Programmatic Usage
@@ -66,11 +44,17 @@ python resume_tailor.py data/sample_resume.json data/sample_job_description.json
 ```python
 from resume_tailor import tailor_resume, read_json_file, prepare_resume_context
 
-# Tailor a resume
+# Tailor a resume (saves to output/tailored_resume.json by default)
+tailored_resume = tailor_resume(
+    resume_path="data/sample_resume.json",
+    job_description_path="data/sample_job_description.json"
+)
+
+# Or specify a custom output path:
 tailored_resume = tailor_resume(
     resume_path="data/sample_resume.json",
     job_description_path="data/sample_job_description.json",
-    output_path="data/tailored_resume.json"
+    output_path="output/tailored_resume.json"
 )
 
 # Read JSON files separately

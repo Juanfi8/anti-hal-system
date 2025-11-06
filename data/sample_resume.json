@@ -1,75 +1,169 @@
 {
   "personal_info": {
-    "name": "John Doe",
-    "email": "john.doe@email.com",
-    "phone": "+1-555-0123",
-    "location": "San Francisco, CA",
-    "linkedin": "linkedin.com/in/johndoe",
-    "github": "github.com/johndoe"
+    "name": "Alex Martinez",
+    "email": "alex.martinez@example.com",
+    "phone": "+1 (555) 123-4567",
+    "linkedin": "https://www.linkedin.com/in/alex-martinez",
+    "github": "https://github.com/alex-martinez",
+    "location": "San Francisco, CA"
   },
-  "professional_summary": "Experienced software engineer with 5 years of experience in full-stack development. Proficient in multiple programming languages and frameworks.",
-  "skills": [
-    "Python",
-    "JavaScript",
-    "React",
-    "Node.js",
-    "SQL",
-    "MongoDB",
-    "Git",
-    "Docker",
-    "AWS",
-    "Machine Learning",
-    "Data Analysis"
-  ],
-  "experience": [
-    {
-      "title": "Software Engineer",
-      "company": "Tech Corp",
-      "location": "San Francisco, CA",
-      "start_date": "2020-01",
-      "end_date": "Present",
-      "responsibilities": [
-        "Developed and maintained web applications using React and Node.js",
-        "Collaborated with cross-functional teams to deliver features",
-        "Implemented RESTful APIs and integrated third-party services",
-        "Optimized database queries improving performance by 30%"
-      ]
-    },
-    {
-      "title": "Junior Developer",
-      "company": "StartUp Inc",
-      "location": "San Francisco, CA",
-      "start_date": "2018-06",
-      "end_date": "2019-12",
-      "responsibilities": [
-        "Built responsive web interfaces using HTML, CSS, and JavaScript",
-        "Participated in agile development processes",
-        "Fixed bugs and improved code quality",
-        "Wrote unit tests to ensure code reliability"
-      ]
-    }
-  ],
   "education": [
     {
-      "degree": "Bachelor of Science in Computer Science",
-      "institution": "University of California",
-      "location": "Berkeley, CA",
-      "graduation_date": "2018-05"
-    }
-  ],
-  "projects": [
-    {
-      "name": "E-commerce Platform",
-      "description": "Built a full-stack e-commerce application with payment integration",
-      "technologies": ["React", "Node.js", "MongoDB", "Stripe API"]
+      "degree": "Master of Science",
+      "major": "Computer Science",
+      "institution": "University of California, Berkeley",
+      "graduation_date": "2023-05",
+      "gpa": "3.85",
+      "relevant_courses": [
+        "Machine Learning",
+        "Natural Language Processing",
+        "Advanced Algorithms",
+        "Distributed Systems",
+        "Deep Learning"
+      ]
     },
     {
-      "name": "Data Analytics Dashboard",
-      "description": "Created an interactive dashboard for visualizing business metrics",
-      "technologies": ["Python", "Pandas", "Plotly", "Flask"]
+      "degree": "Bachelor of Science",
+      "major": "Computer Engineering",
+      "institution": "University of California, Berkeley",
+      "graduation_date": "2020-05",
+      "gpa": "3.75",
+      "relevant_courses": [
+        "Operating Systems",
+        "Computer Architecture",
+        "Data Structures",
+        "Probability & Statistics"
+      ]
+    }
+  ],
+  "work_experience": [
+    {
+      "title": "Machine Learning Engineer",
+      "company": "Halcyon AI",
+      "location": "San Francisco, CA",
+      "start_date": "2023-06",
+      "end_date": "Present",
+      "responsibilities": [
+        "Design and implement production ML models for NLP and sequence modeling.",
+        "Develop scalable model training pipelines using PyTorch and Docker on AWS.",
+        "Collaborate with product and infra teams to deploy models with CI/CD and monitoring."
+      ],
+      "achievements": [
+        "Deployed an NLP pipeline that reduced latency by 40% and improved throughput 3x.",
+        "Authored model interpretability tools used by the research team to diagnose feature drift.",
+        "Reduced model training cost by 30% through mixed-precision training and spot instance scheduling."
+      ]
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Edge Systems, Inc.",
+      "location": "Oakland, CA",
+      "start_date": "2020-07",
+      "end_date": "2023-05",
+      "responsibilities": [
+        "Built backend services in Python and Go for edge computing products.",
+        "Implemented RESTful APIs and microservices integrated with Kubernetes.",
+        "Led efforts to standardize logging, tracing, and fault-tolerance across services."
+      ],
+      "achievements": [
+        "Spearheaded migration to Kubernetes, improving deployment velocity and reliability.",
+        "Reduced API response times by 25% by optimizing critical code paths and database queries.",
+        "Mentored 4 junior engineers and ran the internal engineering onboarding program."
+      ]
+    },
+    {
+      "title": "Research Assistant (NLP Lab)",
+      "company": "UC Berkeley - NLP Group",
+      "location": "Berkeley, CA",
+      "start_date": "2019-09",
+      "end_date": "2020-06",
+      "responsibilities": [
+        "Conducted experiments on transformer architectures and data augmentation for low-resource languages.",
+        "Worked with large datasets and developed preprocessing and evaluation pipelines.",
+        "Co-authored technical reports and presented findings at lab meetings."
+      ],
+      "achievements": [
+        "Contributed to a paper accepted to a peer-reviewed workshop.",
+        "Open-sourced preprocessing utilities that were adopted by multiple lab projects."
+      ]
+    }
+  ],
+  "skills": {
+    "technical": [
+      "Python",
+      "PyTorch",
+      "TensorFlow",
+      "scikit-learn",
+      "SQL",
+      "C++",
+      "Rust",
+      "NLP",
+      "Deep Learning",
+      "Model Deployment"
+    ],
+    "languages": [
+      "English (native)",
+      "Spanish (fluent)"
+    ],
+    "tools": [
+      "Git",
+      "Docker",
+      "Kubernetes",
+      "AWS (S3, EC2, SageMaker)",
+      "GCP",
+      "Linux",
+      "Jupyter",
+      "MLflow"
+    ],
+    "soft_skills": [
+      "Cross-functional collaboration",
+      "Technical leadership",
+      "Problem solving",
+      "Communication",
+      "Mentorship"
+    ]
+  },
+  "projects": [
+    {
+      "name": "Anti-HAL System (Research Prototype)",
+      "description": "A research prototype to detect and mitigate undesired or unsafe model behaviors in large language models. Combines rule-based detectors, fine-tuned classifiers, and a runtime filter with human-in-the-loop escalation.",
+      "technologies": [
+        "Python",
+        "PyTorch",
+        "Transformers",
+        "FastAPI",
+        "Docker",
+        "AWS"
+      ],
+      "achievements": [
+        "Implemented end-to-end detection and mitigation pipeline with <85ms average inference latency per request in production-like environment.",
+        "Designed an evaluation suite for behavior detection covering 20+ scenario classes and automated synthetic data generation for stress tests."
+      ],
+      "url": "https://github.com/alex-martinez/anti-hal-system"
+    },
+    {
+      "name": "Resume Tailor",
+      "description": "A lightweight resume tailoring tool that analyzes job descriptions and rewrites resume sections to better match required keywords and impact statements.",
+      "technologies": [
+        "Python",
+        "spaCy",
+        "OpenAI APIs",
+        "JSON"
+      ],
+      "achievements": [
+        "Built the data extraction and matching logic that increased ATS match score heuristics by 30% in trial runs.",
+        "Packaged as a CLI with example usage and unit tests."
+      ],
+      "url": "https://github.com/alex-martinez/resume-tailor"
     }
   ],
   "certifications": [
-    "AWS Certified Developer - Associate"
+    "AWS Certified Machine Learning – Specialty",
+    "Deep Learning Specialization (Coursera)",
+    "Google Cloud Professional Data Engineer (in progress)"
+  ],
+  "awards": [
+    "Best Paper (Workshop) — Applied NLP Workshop, 2022",
+    "1st Place — University Capstone Hackathon, 2019"
   ]
 }

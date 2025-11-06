@@ -6,164 +6,70 @@ job description using Google's Gemini AI.
 """
 
 import json
-import os
-import re
-from typing import Dict, Any
-from dotenv import load_dotenv
+import sys
+from pathlib import Path
+from typing import Any, Dict, Optional
+
 import google.generativeai as genai
 
-# Load environment variables
-load_dotenv()
+from llm_config import create_gemini_client, get_missing_config, validate_config
+from utils import (
+    extract_json_from_response,
+    prepare_resume_context,
+    read_json_file,
+    validate_job_description_data,
+    validate_resume_data,
+)
 
 
-def read_json_file(file_path: str) -> Dict[str, Any]:
-    """
-    Read and parse a JSON file from the local filesystem.
-    
-    Args:
-        file_path: Path to the JSON file
-        
-    Returns:
-        Dictionary containing the parsed JSON data
-        
-    Raises:
-        FileNotFoundError: If the file doesn't exist
-        json.JSONDecodeError: If the file contains invalid JSON
-    """
-    try:
-        with open(file_path, 'r', encoding='utf-8') as file:
-            data = json.load(file)
-        return data
-    except FileNotFoundError:
-        raise FileNotFoundError(f"File not found: {file_path}")
-    except json.JSONDecodeError as e:
-        raise json.JSONDecodeError(f"Invalid JSON in file {file_path}: {str(e)}", e.doc, e.pos)
-
-
-def prepare_resume_context(resume_path: str, job_description_path: str) -> str:
-    """
-    Read resume and job description JSON files and prepare context for the prompt.
-    
-    Args:
-        resume_path: Path to the resume JSON file
-        job_description_path: Path to the job description JSON file
-        
-    Returns:
-        Formatted string containing both resume and job description context
-    """
-    resume = read_json_file(resume_path)
-    job_description = read_json_file(job_description_path)
-    
-    context = f"""
-Please tailor the following resume for the given job description.
-
-ORIGINAL RESUME:
-{json.dumps(resume, indent=2)}
-
-JOB DESCRIPTION:
-{json.dumps(job_description, indent=2)}
-
-INSTRUCTIONS:
-1. Analyze the job description and identify key requirements, skills, and qualifications
-2. Review the resume and identify sections that need modification to better match the job
-3. Keep contact information, education dates, and factual employment history unchanged
-4. Modify the following sections to align with the job description:
-   - Professional summary/objective
-   - Skills section (emphasize relevant skills, reorder if needed)
-   - Work experience descriptions (highlight relevant achievements and responsibilities)
-   - Project descriptions (if applicable)
-5. Use keywords from the job description naturally in the tailored resume
-6. Maintain honesty - do not fabricate experience or skills
-7. Output the tailored resume in the same JSON format as the input
-
-Please provide the tailored resume as a valid JSON object.
-"""
-    return context
-
-
-def create_gemini_config(api_key: str = None) -> genai.GenerativeModel:
-    """
-    Create and configure Gemini AI model.
-    
-    Args:
-        api_key: Google Gemini API key (if None, will try to get from environment)
-        
-    Returns:
-        Configured GenerativeModel instance
-    """
-    if api_key is None:
-        api_key = os.getenv("GEMINI_API_KEY")
-    
-    if not api_key:
-        raise ValueError("GEMINI_API_KEY not found. Please set it in .env file or pass as parameter.")
-    
-    genai.configure(api_key=api_key)
-    
-    # Create the model with appropriate configuration
-    generation_config = {
-        "temperature": 0.7,
-        "top_p": 0.95,
-        "top_k": 40,
-        "max_output_tokens": 8192,
-    }
-    
-    model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
-        generation_config=generation_config,
-    )
-    
-    return model
-
-
-def tailor_resume(resume_path: str, job_description_path: str, output_path: str = None) -> Dict[str, Any]:
+def tailor_resume(resume_path: str, job_description_path: str, output_path: Optional[str] = None) -> Dict[str, Any]:
     """
     Tailor a resume for a specific job description using Gemini AI.
-    
+
     Args:
         resume_path: Path to the resume JSON file
         job_description_path: Path to the job description JSON file
         output_path: Optional path to save the tailored resume (if None, won't save to file)
-        
+
     Returns:
         Dictionary containing the tailored resume
     """
+    # Load and validate data
+    resume_data = read_json_file(resume_path)
+    job_data = read_json_file(job_description_path)
+
+    if not validate_resume_data(resume_data):
+        raise ValueError("Invalid resume data structure")
+
+    if not validate_job_description_data(job_data):
+        raise ValueError("Invalid job description data structure")
+
     # Prepare the context
-    context = prepare_resume_context(resume_path, job_description_path)
-    
-    # Create Gemini model
-    model = create_gemini_config()
-    
-    # Generate the tailored resume
+    context = prepare_resume_context(resume_data, job_data)
+
+    # Create Gemini client
+    client = create_gemini_client()
+
     try:
-        response = model.generate_content(context)
-        response_text = response.text
-        
+        # Generate the tailored resume
+        response = client.generate_content(context)
+
+        # Extract the content from the response
+        response_text = response.text if response.text else ""
+
         # Try to extract JSON from the response
-        json_match = re.search(r'```json\s*(.*?)\s*```', response_text, re.DOTALL)
-        if json_match:
-            tailored_resume = json.loads(json_match.group(1))
-        else:
-            # Try to find JSON object in the response
-            json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
-            if json_match:
-                tailored_resume = json.loads(json_match.group(0))
-            else:
-                # If no JSON found, try to parse the entire response
-                tailored_resume = json.loads(response_text)
-    
-    except json.JSONDecodeError as e:
-        print(f"Warning: Could not parse response as JSON. Error: {str(e)}")
-        print("Response text:", response_text[:500])
-        tailored_resume = {"raw_response": response_text, "error": str(e)}
+        tailored_resume = extract_json_from_response(response_text)
+
     except Exception as e:
-        raise ValueError(f"Error generating tailored resume: {str(e)}")
-    
+        raise Exception(f"Error generating tailored resume: {str(e)}")
+
     # Save to file if output path is provided
     if output_path:
-        with open(output_path, 'w', encoding='utf-8') as f:
+        output_file = Path(output_path)
+        with open(output_file, "w", encoding="utf-8") as f:
             json.dump(tailored_resume, f, indent=2, ensure_ascii=False)
         print(f"Tailored resume saved to: {output_path}")
-    
+
     return tailored_resume
 
 
@@ -171,32 +77,43 @@ def main():
     """
     Main function to demonstrate usage of the resume tailoring application.
     """
-    import sys
-    
     if len(sys.argv) < 3:
         print("Usage: python resume_tailor.py <resume_path> <job_description_path> [output_path]")
         print("\nExample:")
         print("  python resume_tailor.py data/resume.json data/job_description.json data/tailored_resume.json")
         sys.exit(1)
-    
+
     resume_path = sys.argv[1]
     job_description_path = sys.argv[2]
-    output_path = sys.argv[3] if len(sys.argv) > 3 else "tailored_resume.json"
-    
+    output_path = sys.argv[3] if len(sys.argv) > 3 else "output/tailored_resume.json"
+
+    # Ensure output directory exists
+    output_file = Path(output_path)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    # Validate configuration
+    if not validate_config():
+        missing = get_missing_config()
+        print("Error: Missing required environment variables:")
+        for var in missing:
+            print(f"  - {var}")
+        print("\nPlease set these variables in your .env file.")
+        sys.exit(1)
+
     try:
         print("Reading input files...")
         print(f"Resume: {resume_path}")
         print(f"Job Description: {job_description_path}")
         print("\nTailoring resume... (this may take a moment)")
-        
+
         tailored_resume = tailor_resume(resume_path, job_description_path, output_path)
-        
-        print("\n" + "="*50)
+
+        print("\n" + "=" * 50)
         print("Resume tailoring completed successfully!")
-        print("="*50)
-        print(f"\nTailored resume preview:")
+        print("=" * 50)
+        print("Tailored resume preview:")
         print(json.dumps(tailored_resume, indent=2)[:500] + "...")
-        
+
     except Exception as e:
         print(f"\nError: {str(e)}")
         sys.exit(1)
