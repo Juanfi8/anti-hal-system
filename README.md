@@ -156,8 +156,8 @@ You can use these to test the application or as templates for your own data.
 ## How It Works
 
 1. **Read Input Files**: The application reads your resume and job description from JSON files
-2. **Context Preparation**: Combines both inputs into a structured prompt
-3. **AI Processing**: Uses AutoGen with Gemini AI to analyze and tailor the resume
+2. **Context Preparation**: Combines both inputs into a structured prompt with detailed instructions
+3. **AI Processing**: Uses Google's Gemini AI to analyze and tailor the resume
 4. **Smart Modifications**: The AI identifies relevant sections to modify while preserving factual information
 5. **Output Generation**: Produces a tailored resume in JSON format
 
@@ -165,14 +165,20 @@ You can use these to test the application or as templates for your own data.
 
 ### Gemini Model Configuration
 
-You can customize the LLM configuration in `resume_tailor.py`:
+You can customize the model configuration in `resume_tailor.py`:
 
 ```python
-llm_config = {
-    "config_list": config_list,
-    "temperature": 0.7,  # Adjust for creativity (0.0-1.0)
-    "timeout": 120,      # Timeout in seconds
+generation_config = {
+    "temperature": 0.7,        # Adjust for creativity (0.0-1.0)
+    "top_p": 0.95,             # Nucleus sampling parameter
+    "top_k": 40,               # Top-k sampling parameter
+    "max_output_tokens": 8192, # Maximum length of output
 }
+
+model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",  # Or "gemini-1.5-pro" for better quality
+    generation_config=generation_config,
+)
 ```
 
 ## Troubleshooting
