@@ -1,15 +1,16 @@
 """
-Resume Tailoring Application using AutoGen and Gemini AI
+Resume Tailoring Application using Gemini AI
 
 This module provides functionality to tailor a person's resume for a specific
-job description using AutoGen agents powered by Google's Gemini AI.
+job description using Google's Gemini AI.
 """
 
 import json
 import os
+import re
 from typing import Dict, Any
 from dotenv import load_dotenv
-import autogen
+import google.generativeai as genai
 
 # Load environment variables
 load_dotenv()
@@ -80,15 +81,15 @@ Please provide the tailored resume as a valid JSON object.
     return context
 
 
-def create_gemini_config(api_key: str = None) -> Dict[str, Any]:
+def create_gemini_config(api_key: str = None) -> genai.GenerativeModel:
     """
-    Create configuration for Gemini AI model.
+    Create and configure Gemini AI model.
     
     Args:
         api_key: Google Gemini API key (if None, will try to get from environment)
         
     Returns:
-        Configuration dictionary for AutoGen
+        Configured GenerativeModel instance
     """
     if api_key is None:
         api_key = os.getenv("GEMINI_API_KEY")
@@ -96,26 +97,27 @@ def create_gemini_config(api_key: str = None) -> Dict[str, Any]:
     if not api_key:
         raise ValueError("GEMINI_API_KEY not found. Please set it in .env file or pass as parameter.")
     
-    config_list = [
-        {
-            "model": "gemini-pro",
-            "api_key": api_key,
-            "api_type": "google"
-        }
-    ]
+    genai.configure(api_key=api_key)
     
-    llm_config = {
-        "config_list": config_list,
+    # Create the model with appropriate configuration
+    generation_config = {
         "temperature": 0.7,
-        "timeout": 120,
+        "top_p": 0.95,
+        "top_k": 40,
+        "max_output_tokens": 8192,
     }
     
-    return llm_config
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-flash",
+        generation_config=generation_config,
+    )
+    
+    return model
 
 
 def tailor_resume(resume_path: str, job_description_path: str, output_path: str = None) -> Dict[str, Any]:
     """
-    Tailor a resume for a specific job description using AutoGen agents.
+    Tailor a resume for a specific job description using Gemini AI.
     
     Args:
         resume_path: Path to the resume JSON file
@@ -128,55 +130,33 @@ def tailor_resume(resume_path: str, job_description_path: str, output_path: str 
     # Prepare the context
     context = prepare_resume_context(resume_path, job_description_path)
     
-    # Create LLM configuration
-    llm_config = create_gemini_config()
+    # Create Gemini model
+    model = create_gemini_config()
     
-    # Create AutoGen agents
-    assistant = autogen.AssistantAgent(
-        name="resume_tailor",
-        llm_config=llm_config,
-        system_message="""You are an expert resume writer and career counselor.
-        Your task is to tailor resumes to match specific job descriptions while maintaining
-        accuracy and honesty. You understand ATS (Applicant Tracking Systems) and know how
-        to optimize resumes with relevant keywords. You always output valid JSON format."""
-    )
-    
-    user_proxy = autogen.UserProxyAgent(
-        name="user",
-        human_input_mode="NEVER",
-        max_consecutive_auto_reply=1,
-        code_execution_config=False,
-    )
-    
-    # Initiate the conversation
-    user_proxy.initiate_chat(
-        assistant,
-        message=context
-    )
-    
-    # Extract the tailored resume from the conversation
-    # Get the last message from the assistant
-    last_message = user_proxy.last_message()
-    
-    if last_message and "content" in last_message:
-        response_content = last_message["content"]
+    # Generate the tailored resume
+    try:
+        response = model.generate_content(context)
+        response_text = response.text
         
         # Try to extract JSON from the response
-        try:
-            # Find JSON in the response (it might be wrapped in markdown code blocks)
-            import re
-            json_match = re.search(r'```json\s*(.*?)\s*```', response_content, re.DOTALL)
+        json_match = re.search(r'```json\s*(.*?)\s*```', response_text, re.DOTALL)
+        if json_match:
+            tailored_resume = json.loads(json_match.group(1))
+        else:
+            # Try to find JSON object in the response
+            json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
             if json_match:
-                tailored_resume = json.loads(json_match.group(1))
+                tailored_resume = json.loads(json_match.group(0))
             else:
-                # Try to parse the entire response as JSON
-                tailored_resume = json.loads(response_content)
-        except json.JSONDecodeError:
-            # If parsing fails, return the response as-is
-            print("Warning: Could not parse response as JSON. Returning raw response.")
-            tailored_resume = {"raw_response": response_content}
-    else:
-        raise ValueError("No response received from the assistant")
+                # If no JSON found, try to parse the entire response
+                tailored_resume = json.loads(response_text)
+    
+    except json.JSONDecodeError as e:
+        print(f"Warning: Could not parse response as JSON. Error: {str(e)}")
+        print("Response text:", response_text[:500])
+        tailored_resume = {"raw_response": response_text, "error": str(e)}
+    except Exception as e:
+        raise ValueError(f"Error generating tailored resume: {str(e)}")
     
     # Save to file if output path is provided
     if output_path:

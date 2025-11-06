@@ -1,14 +1,14 @@
-# Resume Tailoring System with AutoGen
+# Resume Tailoring System with Gemini AI
 
-An AI-powered resume tailoring application that uses AutoGen and Google's Gemini AI to customize resumes for specific job descriptions.
+An AI-powered resume tailoring application that uses Google's Gemini AI to customize resumes for specific job descriptions.
 
 ## Features
 
 - **Intelligent Resume Tailoring**: Automatically adapts your resume to match job descriptions
-- **AutoGen Integration**: Uses AutoGen agents for sophisticated AI-powered text generation
 - **Gemini AI**: Leverages Google's Gemini language model for high-quality results
 - **JSON-based**: Works with structured JSON format for easy parsing and modification
 - **Contextual Modifications**: Smartly modifies relevant sections while keeping factual information intact
+- **Simple API**: Easy-to-use functions for reading JSON files and preparing context
 
 ## What Gets Modified
 
